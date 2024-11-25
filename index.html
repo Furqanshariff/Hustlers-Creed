@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hustlers Creed</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .section-height {
+            min-height: 100vh;
+        }
+        .cursor-glow {
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            mix-blend-mode: difference;
+        }
+        .text-stroke {
+            -webkit-text-stroke: 1px white;
+            color: transparent;
+        }
+        .hover-reveal:hover .hover-text {
+            color: white;
+            -webkit-text-stroke: 0;
+            transition: all 0.3s ease;
+        }
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 40;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+            margin: 0;
+            width: 100%;
+        }
+        .menu-btn {
+            position: relative;
+            z-index: 50;
+        }
+        .section-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 30;
+        }
+        .section-indicator-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        .section-indicator-dot.active {
+            background: white;
+            transform: scale(1.5);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+        @media (min-width: 1024px) {
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- Cursor -->
+    <div class="cursor-glow hidden md:block"></div>
+
+    <!-- Section Indicator -->
+    <div class="section-indicator hidden md:block">
+        <div class="section-indicator-dot active"></div>
+        <div class="section-indicator-dot"></div>
+        <div class="section-indicator-dot"></div>
+        <div class="section-indicator-dot"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 px-6 py-4 mix-blend-difference">
+        <div class="flex items-center justify-between">
+            <div class="w-16">
+                <img src="/logo.png" alt="Company Logo" class="rounded-full">
+            </div>
+            <h1 class="text-2xl font-bold absolute left-1/2 transform -translate-x-1/2">HUSTLERS CREED</h1>
+            <button class="menu-btn text-lg font-light hover:opacity-70 transition-opacity" onclick="toggleMenu()">
+                <span class="menu-text">MENU</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Fullscreen Menu Overlay -->
+    <div id="menuOverlay" class="menu-overlay">
+        <div class="h-full flex items-center justify-center">
+            <div class="space-y-8 text-center">
+                <a href="#hero" class="block text-6xl font-bold hover:text-purple-500 transition-colors" onclick="toggleMenu()">HOME</a>
+                <a href="#services" class="block text-6xl font-bold hover:text-purple-500 transition-colors" onclick="toggleMenu()">SERVICES</a>
+                <a href="#projects" class="block text-6xl font-bold hover:text-purple-500 transition-colors" onclick="toggleMenu()">PROJECTS</a>
+                <a href="https://furqanshariff.github.io/Shariff.github.io/" class="block text-6xl font-bold hover:text-purple-500 transition-colors" onclick="toggleMenu()">CONTACT</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="section-height flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-black to-gray-900">
+        <div class="absolute inset-0 opacity-50">
+           <!-- <img src="/api/placeholder/1920/1080" alt="" class="w-full h-full object-cover"> -->
+        </div>
+        <div class="relative z-10 text-center">
+            <h2 class="text-8xl font-bold mb-8 animate-fade-in">DIGITAL EVOLUTION</h2>
+            <p class="text-xl font-light animate-fade-in">"BUILDING TAILORED SOFTWARE AND MICROSERVICES TO TURN ENTREPRENEURIAL VISIONS INTO SUCCESS STORIES."</p>
+            <br>
+            <p class="text-xl font-light animate-fade-in">CRAFTING DIGITAL EXPERIENCES SINCE 2024</p>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Services Section -->
+    <section id="services" class="section-height py-24 bg-gradient-to-b from-gray-900 to-black">
+        <h2 class="text-4xl font-bold mb-16 text-center">OUR SERVICES</h2>
+        <div class="services-grid">
+            <div class="hover-reveal p-8 bg-gray-900 rounded-lg transform hover:-translate-y-2 transition-all">
+                <h3 class="text-4xl font-bold mb-6 text-stroke hover-text">WEB DESIGN</h3>
+                <p class="text-lg font-light opacity-70">Crafting immersive digital experiences that captivate and convert.</p>
+            </div>
+            
+            <div class="hover-reveal p-8 bg-gray-900 rounded-lg transform hover:-translate-y-2 transition-all">
+                <h3 class="text-4xl font-bold mb-6 text-stroke hover-text">SOFTWARE</h3>
+                <p class="text-lg font-light opacity-70">Building powerful solutions that drive business growth.</p>
+            </div>
+            
+            <div class="hover-reveal p-8 bg-gray-900 rounded-lg transform hover:-translate-y-2 transition-all">
+                <h3 class="text-4xl font-bold mb-6 text-stroke hover-text">DIGITAL MARKETING</h3>
+                <p class="text-lg font-light opacity-70">Strategic campaigns that reach and engage your target audience.</p>
+            </div>
+            
+            <div class="hover-reveal p-8 bg-gray-900 rounded-lg transform hover:-translate-y-2 transition-all">
+                <h3 class="text-4xl font-bold mb-6 text-stroke hover-text">BUSINESS SOLUTIONS</h3>
+                <p class="text-lg font-light opacity-70">Comprehensive strategies to optimize your business operations.</p>
+            </div>
+            
+            <div class="hover-reveal p-8 bg-gray-900 rounded-lg transform hover:-translate-y-2 transition-all">
+                <h3 class="text-4xl font-bold mb-6 text-stroke hover-text">GRAPHIC DESIGN</h3>
+                <p class="text-lg font-light opacity-70">Visual storytelling that brings your brand to life.</p>
+            </div>
+            
+            <div class="hover-reveal p-8 bg-gray-900 rounded-lg transform hover:-translate-y-2 transition-all">
+                <h3 class="text-4xl font-bold mb-6 text-stroke hover-text">LOGO DESIGN</h3>
+                <p class="text-lg font-light opacity-70">Memorable brand identities that make lasting impressions.</p>
+            </div>
+            
+            <div class="hover-reveal p-8 bg-gray-900 rounded-lg transform hover:-translate-y-2 transition-all">
+                <h3 class="text-4xl font-bold mb-6 text-stroke hover-text">VIDEO EDITING</h3>
+                <p class="text-lg font-light opacity-70">Professional video production and post-processing services.</p>
+            </div>
+            
+            <div class="hover-reveal p-8 bg-gray-900 rounded-lg transform hover:-translate-y-2 transition-all">
+                <h3 class="text-4xl font-bold mb-6 text-stroke hover-text">ADVERTISING</h3>
+                <p class="text-lg font-light opacity-70">Result-driven campaigns across digital and traditional media.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Project Showcase -->
+    <section id="projects" class="section-height grid grid-cols-1 md:grid-cols-2 bg-gradient-to-b from-black to-gray-900">
+        <div class="p-12 md:p-24 flex items-center">
+            <div>
+                <h3 class="text-4xl md:text-6xl font-bold mb-8">RECENT WORKS</h3>
+                <p class="text-xl font-light opacity-70 mb-12">Explore our latest projects and innovations.</p>
+                <button class="text-lg border border-white px-8 py-3 hover:bg-white hover:text-black transition-all">
+                    VIEW ALL PROJECTS
+                </button>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 p-4 bg-gray-900">
+            <div class="bg-black overflow-hidden rounded-lg">
+                <img src="logo.png" alt="Project 1" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="bg-black overflow-hidden rounded-lg">
+                <img src="logo.png" alt="Project 2" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="bg-black overflow-hidden rounded-lg">
+                <img src="logo.png" alt="Project 3" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+            </div>
+            <div class="bg-black overflow-hidden rounded-lg">
+                <img src="logo.png" alt="Project 4" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-height flex items-center justify-center bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-4xl w-full px-6">
+            <h2 class="text-4xl md:text-7xl font-bold mb-16 text-center">START A PROJECT</h2>
+            <form class="space-y-12">
+                <div class="border-b border-white/20 focus-within:border-white">
+                    <input type="text" placeholder="YOUR NAME" class="w-full bg-transparent py-4 focus:outline-none text-xl">
+                </div>
+                <div class="border-b border-white/20 focus-within:border-white">
+                    <input type="email" placeholder="YOUR EMAIL" class="w-full bg-transparent py-4 focus:outline-none text-xl">
+                </div>
+                <div class="border-b border-white/20 focus-within:border-white">
+                    <textarea placeholder="PROJECT DETAILS" rows="4" class="w-full bg-transparent py-4 focus:outline-none text-xl"></textarea>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="text-lg border border-white px-12 py-4 hover:bg-white hover:text-black transition-all">
+                        SEND MESSAGE
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/20 bg-black">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <h3 class="text-xl font-bold mb-6">HUSTLERS CREED</h3>
+                <p class="font-light opacity-70">Transforming ideas into digital reality</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-6">CONTACT</h3>
+                <p class="font-light opacity-70">furqanshariff2@gmail.com</p>
+                <p class="font-light opacity-70">+91-8660618676</p>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold mb-6">SOCIALS</h3>
+                <div class="space-x-4">
+                    <a href="#" class="font-light opacity-70 hover:opacity-100">INSTAGRAM</a>
+                    <a href="#" class="font-light opacity-70 hover:opacity-100">TWITTER</a>
+                    <a href="#" class="font-light opacity-70 hover:opacity-100">LINKEDIN</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Custom cursor movement
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor-glow');
+            if (cursor) {
+                cursor.style.left = e.clientX - 10 + 'px';
+                cursor.style.top = e.clientY - 10 + 'px';
+            }
+        });
+
+        // Toggle menu functionality
+        function toggleMenu() {
+            const menuOverlay = document.getElementById('menuOverlay');
+            const menuText = document.querySelector('.menu-text');
+            
+            menuOverlay.classList.toggle('active');
+            menuText.textContent = menuOverlay.classList.contains('active') ? 'CLOSE' : 'MENU';
+        }
+
+        // Section indicator functionality
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const dots = document.querySelectorAll('.section-indicator-dot');
+            
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top >= -300 && rect.top <= 300) {
+                    dots.forEach(dot => dot.classList.remove('active'));
+                    dots[index].classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
